@@ -15,6 +15,12 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // ✅ ENABLE CORS
+  app.enableCors({
+    origin: 'http://localhost:5173', // React (Vite)
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('NestJS API')
     .addBearerAuth()

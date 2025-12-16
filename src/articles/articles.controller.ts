@@ -12,6 +12,7 @@ import {
 import { ArticlesService } from './articles.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { CreateArticleDto } from './dto/create-article.dto';
 
 @ApiTags('Articles')
 @ApiBearerAuth()
@@ -21,7 +22,7 @@ export class ArticlesController {
   constructor(private service: ArticlesService) {}
 
   @Post()
-  create(@Body() dto, @Req() req) {
+  create(@Body() dto: CreateArticleDto, @Req() req) {
     return this.service.create(dto, req.user.userId);
   }
 
@@ -36,7 +37,7 @@ export class ArticlesController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() dto) {
+  update(@Param('id') id: string, @Body() dto: CreateArticleDto) {
     return this.service.update(+id, dto);
   }
 
